@@ -1,0 +1,14 @@
+name: clasher_bot
+description: Discord bot for personal server
+homepage: https://github.com/Des1ynY/clasher_bot
+
+environment:
+  sdk: ">=2.18.6 <3.0.0"
+
+dependencies:
+  # Discord API wrapper
+  nyxx: ^4.4.1
+  nyxx_interactions: ^4.5.0
+
+  # Utils
+  dotenv: ^4.0.1
