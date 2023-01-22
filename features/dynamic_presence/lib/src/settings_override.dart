@@ -23,5 +23,5 @@ class SettingsOverride {
   ];
 
   /// Default period of presence change
-  static const _updatePeriod = Duration(minutes: 5);
+  static const _updatePeriod = Duration(minutes: 10);
 }

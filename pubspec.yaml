@@ -10,5 +10,9 @@ dependencies:
   nyxx: ^4.4.1
   nyxx_interactions: ^4.5.0
 
+  # Features
+  dynamic_presence:
+    path: features/dynamic_presence
+
   # Utils
   dotenv: ^4.0.1
