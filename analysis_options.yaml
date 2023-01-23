@@ -80,7 +80,6 @@ analyzer:
 linter:
   rules:
     # Error rules
-    - always_use_package_imports
     - avoid_dynamic_calls
     - avoid_empty_else
     - avoid_print
