@@ -1,7 +1,7 @@
 import 'package:drift/drift.dart';
-import 'package:temp_rooms/src/cache/temp_rooms/temp_rooms_table.dart';
 
 import '../cache.dart';
+import 'temp_rooms_table.dart';
 
 part 'temp_rooms_dao.g.dart';
 
