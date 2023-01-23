@@ -12,4 +12,16 @@ class FuncChannelsDao extends DatabaseAccessor<Cache> with _$FuncChannelsDaoMixi
   Stream<List<FuncChannel>> get dataStream {
     return select(db.funcChannelsTable).watch().asBroadcastStream();
   }
+
+  Future<void> cacheFuncChannel(FuncChannel funcChannel) async {
+    await into(db.funcChannelsTable).insert(
+      funcChannel,
+      onConflict: DoUpdate((old) => funcChannel),
+    );
+  }
+
+  Future<void> deleteFuncChannel(int channelId) async {
+    final query = delete(db.funcChannelsTable)..where((tbl) => tbl.id.equals(channelId));
+    await query.go();
+  }
 }

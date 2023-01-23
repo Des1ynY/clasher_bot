@@ -1,12 +1,14 @@
 import 'package:nyxx/nyxx.dart';
 
 import '../cache/cache.dart';
+import '../config.dart';
 import 'event_handler.dart';
 
 class RoomsCreator extends EventsHandler<IVoiceStateUpdateEvent> {
   final Cache cache;
+  final TempRoomsConfig config;
 
-  RoomsCreator(super.events, {required this.cache}) {
+  RoomsCreator(super.events, {required this.cache, required this.config}) {
     cache.funcChannelsDao.dataStream.listen((data) => _funcChannels = data);
   }
 
@@ -35,7 +37,7 @@ class RoomsCreator extends EventsHandler<IVoiceStateUpdateEvent> {
     final funcChannel = _funcChannels.firstWhere((e) => e.id == event.state.channel!.id.id);
 
     final roomBuilder = VoiceChannelBuilder()
-      ..name = funcChannel.getRoomName(member.nickname ?? user.username)
+      ..name = funcChannel.getRoomName(member.nickname ?? user.username, config: config)
       ..userLimit = funcChannel.usersLimit
       ..position = guildChannel.position - 1
       ..parentChannel = guildChannel.parentChannel?.id.toSnowflakeEntity();
@@ -53,18 +55,25 @@ class RoomsCreator extends EventsHandler<IVoiceStateUpdateEvent> {
 }
 
 extension on FuncChannel {
-  String getRoomName(String username) {
+  String getRoomName(String username, {required TempRoomsConfig config}) {
     final regexp = RegExp('%[a-z]*%', caseSensitive: false);
     final validMask = name.replaceAllMapped(regexp, _toUppercase);
-    final result = validMask.replaceAll('%USERNAME%', username).replaceAll('%EMOJI%', emoji);
+    final result = validMask.replaceAll('%USERNAME%', username).replaceAll(
+          '%EMOJI%',
+          emoji(config),
+        );
 
     return result;
   }
 
-  String get emoji {
-    if (emojiSet == null) return '';
+  String emoji(TempRoomsConfig config) {
+    var set = emojiSet ?? config.emojiSet;
 
-    final bytes = emojiSet!.codeUnits;
+    if (config.overrideCachedEmojis || emojiSet == null) {
+      set = config.emojiSet;
+    }
+
+    final bytes = set.codeUnits;
     final emojis = List.generate(bytes.length ~/ 2, (i) => [...bytes.sublist(i, i + 1)]);
 
     return String.fromCharCodes(emojis[id % emojis.length]);
