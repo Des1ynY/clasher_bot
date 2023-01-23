@@ -9,7 +9,9 @@ part 'temp_rooms_dao.g.dart';
 class TempRoomsDao extends DatabaseAccessor<Cache> with _$TempRoomsDaoMixin {
   TempRoomsDao(super.db);
 
-  Stream<List<TempRoom>> get dataStream => select(db.tempRoomsTable).watch();
+  Stream<List<TempRoom>> get dataStream {
+    return select(db.tempRoomsTable).watch().asBroadcastStream();
+  }
 
   Future<TempRoom> cacheTempRoom(int roomId, int authorId, int guildId) async {
     final room = TempRoomsTableCompanion(
@@ -22,6 +24,16 @@ class TempRoomsDao extends DatabaseAccessor<Cache> with _$TempRoomsDaoMixin {
     return into(db.tempRoomsTable).insertReturning(
       room,
       onConflict: DoUpdate((old) => room),
+    );
+  }
+
+  Future<void> deleteTempRoom(int roomId) async {
+    final query = update(db.tempRoomsTable)..where((tbl) => tbl.id.equals(roomId));
+
+    await query.write(
+      TempRoomsTableCompanion(
+        deletedTime: Value(DateTime.now()),
+      ),
     );
   }
 }
