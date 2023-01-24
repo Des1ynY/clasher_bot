@@ -64,7 +64,7 @@ class CreateFuncChannel implements SlashCommand {
 
       await event.respond(getSuccessMessage(channelId));
     } on Object {
-      await event.respond(getFailureMessage());
+      await event.respond(getFailureMessage(), hidden: true);
     }
   }
 
