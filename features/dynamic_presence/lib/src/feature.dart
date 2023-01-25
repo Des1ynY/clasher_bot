@@ -1,20 +1,22 @@
 import 'dart:async';
 
-import 'package:dynamic_presence/src/settings_override.dart';
+import 'package:dynamic_presence/src/config.dart';
 import 'package:nyxx/nyxx.dart';
 
 class DynamicPresence {
   final INyxxWebsocket client;
-  final SettingsOverride settings;
+  final DynamicPresenceConfig settings;
 
   DynamicPresence({
     required this.client,
-    SettingsOverride? override,
-  }) : settings = override ?? SettingsOverride() {
+    DynamicPresenceConfig? override,
+  }) : settings = override ?? DynamicPresenceConfig() {
     client.onReady.listen(_handler);
   }
 
   void _handler(IReadyEvent event) {
+    client.setPresence(settings.presences.first);
+
     Timer.periodic(settings.updatePeriod, (timer) {
       client.setPresence(settings.presences[timer.tick % settings.presences.length]);
     });
