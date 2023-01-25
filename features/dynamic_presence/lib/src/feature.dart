@@ -5,20 +5,20 @@ import 'package:nyxx/nyxx.dart';
 
 class DynamicPresence {
   final INyxxWebsocket client;
-  final DynamicPresenceConfig settings;
+  final DynamicPresenceConfig config;
 
   DynamicPresence({
     required this.client,
-    DynamicPresenceConfig? override,
-  }) : settings = override ?? DynamicPresenceConfig() {
+    DynamicPresenceConfig? configOverride,
+  }) : config = configOverride ?? DynamicPresenceConfig() {
     client.onReady.listen(_handler);
   }
 
   void _handler(IReadyEvent event) {
-    client.setPresence(settings.presences.first);
+    client.setPresence(config.presences.first);
 
-    Timer.periodic(settings.updatePeriod, (timer) {
-      client.setPresence(settings.presences[timer.tick % settings.presences.length]);
+    Timer.periodic(config.updatePeriod, (timer) {
+      client.setPresence(config.presences[timer.tick % config.presences.length]);
     });
   }
 }

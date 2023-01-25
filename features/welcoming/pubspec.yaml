@@ -1,0 +1,9 @@
+name: welcoming
+description: Welcoming new server members
+
+environment:
+  sdk: ">=2.19.0 <3.0.0"
+
+dependencies:
+  nyxx: ^4.4.1
+  nyxx_interactions: ^4.5.0
