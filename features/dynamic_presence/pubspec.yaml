@@ -1,0 +1,11 @@
+name: dynamic_presence
+description: Dynamic Rich Presence for Discord bot
+version: 0.0.1
+
+environment:
+  sdk: ">=2.18.6 <3.0.0"
+
+dependencies:
+  # Discord API wrapper
+  nyxx: ^4.4.1
+  nyxx_interactions: ^4.5.0

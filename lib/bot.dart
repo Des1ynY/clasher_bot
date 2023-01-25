@@ -1,3 +1,4 @@
+import 'package:dynamic_presence/dynamic_presence.dart';
 import 'package:nyxx/nyxx.dart';
 import 'package:nyxx_interactions/nyxx_interactions.dart';
 
@@ -11,8 +12,12 @@ class ClasherBot {
     actions = IInteractions.create(WebsocketInteractionBackend(client));
   }
 
-  /// Launches bot
   Future<void> start() async {
-    return client.connect();
+    actions.syncOnReady();
+
+    // Enables features
+    DynamicPresence(client: client);
+
+    await client.connect();
   }
 }
