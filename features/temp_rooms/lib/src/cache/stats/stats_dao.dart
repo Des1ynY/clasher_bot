@@ -39,7 +39,7 @@ class StatsDao extends DatabaseAccessor<Cache> with _$StatsDaoMixin {
             room.authorId: 1,
           },
           'roomsCreated': 1,
-          'roomsUseInMinutes': roomUseDuration,
+          'roomsUseInMinutes': roomUseDuration.inMinutes,
         };
       } else {
         final creators = statsByGuild[room.guildId]!['creators'] as Map<int, int>;
@@ -77,7 +77,12 @@ class StatsDao extends DatabaseAccessor<Cache> with _$StatsDaoMixin {
         mostActiveCreatorCount: mostActiveCreator.value,
       );
 
-      cachingProcesses.add(into(db.statsTable).insert(stat));
+      cachingProcesses.add(
+        into(db.statsTable).insert(
+          stat,
+          onConflict: DoUpdate((old) => stat),
+        ),
+      );
     }
 
     await Future.wait(cachingProcesses);

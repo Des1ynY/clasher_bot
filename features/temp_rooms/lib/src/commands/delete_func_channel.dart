@@ -20,6 +20,7 @@ class DeleteFuncChannel implements SlashCommand {
           CommandOptionType.channel,
           'channel',
           'Выберите функциональный канал',
+          channelTypes: [ChannelType.voice],
           required: true,
         ),
       ],

@@ -6,6 +6,6 @@ class StatsCollector {
   final Cache cache;
 
   StatsCollector({required this.cache}) {
-    Timer.periodic(const Duration(days: 1), (timer) => cache.statsDao.collectStats());
+    Timer.periodic(const Duration(seconds: 15), (timer) => cache.statsDao.collectStats());
   }
 }

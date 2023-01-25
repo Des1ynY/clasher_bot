@@ -17,10 +17,13 @@ class ClasherBot {
 
   Future<void> start() async {
     actions.syncOnReady();
+    client
+      ..registerPlugin(Logging())
+      ..registerPlugin(IgnoreExceptions());
 
     // Enables features
     DynamicPresence(client: client);
-    TempRooms(client: client, actions: actions);
+    TempRooms(client: client, actions: actions, connection: dbConnection);
 
     await client.connect();
   }

@@ -74,9 +74,12 @@ extension on FuncChannel {
     }
 
     final bytes = set.codeUnits;
-    final emojis = List.generate(bytes.length ~/ 2, (i) => [...bytes.sublist(i, i + 1)]);
+    final emojis = List.generate(
+      bytes.length ~/ 2,
+      (i) => String.fromCharCodes(bytes.sublist(i, i + 2)),
+    );
 
-    return String.fromCharCodes(emojis[id % emojis.length]);
+    return emojis[id % emojis.length];
   }
 
   String _toUppercase(Match match) => match.input.substring(match.start, match.end).toUpperCase();

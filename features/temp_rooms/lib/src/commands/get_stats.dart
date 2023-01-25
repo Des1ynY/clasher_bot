@@ -36,7 +36,6 @@ class GetStats implements SlashCommand {
     }
   }
 
-  // FIXME
   MessageBuilder getSuccessMessage(Stat stats) {
     final content = EmbedBuilder()
       ..color = config.messageColor
