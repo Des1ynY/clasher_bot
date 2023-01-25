@@ -1,10 +1,10 @@
 import 'package:nyxx/nyxx.dart';
 
-class SettingsOverride {
+class DynamicPresenceConfig {
   final List<PresenceBuilder> presences;
   final Duration updatePeriod;
 
-  SettingsOverride({
+  DynamicPresenceConfig({
     List<PresenceBuilder>? presences,
     Duration? updatePeriod,
   })  : presences = presences ?? _presences,
