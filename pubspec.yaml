@@ -10,9 +10,19 @@ dependencies:
   nyxx: ^4.4.1
   nyxx_interactions: ^4.5.0
 
+  # Database
+  drift: ^2.4.2
+
   # Features
   dynamic_presence:
     path: features/dynamic_presence
+  temp_rooms:
+    path: features/temp_rooms
 
   # Utils
+  path: ^1.8.3
   dotenv: ^4.0.1
+
+dev_dependencies:
+  build_runner: ^2.3.3
+  drift_dev: ^2.4.1
