@@ -45,7 +45,7 @@ class DeleteFuncChannel implements SlashCommand {
 
   MessageBuilder getSuccessMessage(int channelId) {
     final content = EmbedBuilder()
-      ..color = config.messageColor
+      ..color = DiscordColor.fromHexString(config.messageHexColor)
       ..addField(
         name: 'Готово!',
         content: '<#$channelId> больше не функциональный!',
@@ -56,7 +56,7 @@ class DeleteFuncChannel implements SlashCommand {
 
   MessageBuilder getFailureMessage() {
     final content = EmbedBuilder()
-      ..color = config.messageColor
+      ..color = DiscordColor.fromHexString(config.messageHexColor)
       ..addField(
         name: 'Упс!',
         content: 'Что-то пошло не так, возможно, стоит попробовать еще раз...',
