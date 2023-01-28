@@ -18,13 +18,9 @@ class Welcoming {
     final systemChannel = await guild.systemChannel?.getOrDownload();
 
     if (systemChannel != null) {
+      final welcomeMessage = await config.welcomeMessageBuilder(event);
+
       await systemChannel.sendMessage(welcomeMessage);
     }
-  }
-
-  MessageBuilder get welcomeMessage {
-    final content = EmbedBuilder();
-
-    return MessageBuilder.embed(content);
   }
 }
