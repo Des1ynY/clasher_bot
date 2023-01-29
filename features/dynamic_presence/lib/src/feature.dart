@@ -15,7 +15,7 @@ class DynamicPresence {
   }
 
   void _handler(IReadyEvent event) {
-    client.setPresence(config.presences.first);
+    // client.setPresence(config.presences.first);
 
     Timer.periodic(config.updatePeriod, (timer) {
       client.setPresence(config.presences[timer.tick % config.presences.length]);

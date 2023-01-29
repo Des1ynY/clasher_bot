@@ -5,8 +5,9 @@ typedef WelcomeMessageBuilder = Future<MessageBuilder> Function(IGuildMemberAddE
 class WelcomingConfig {
   final WelcomeMessageBuilder welcomeMessageBuilder;
 
-  WelcomingConfig({WelcomeMessageBuilder? welcomeMessage})
-      : welcomeMessageBuilder = welcomeMessage ?? _welcomeMessage;
+  WelcomingConfig({
+    WelcomeMessageBuilder? welcomeMessage,
+  }) : welcomeMessageBuilder = welcomeMessage ?? _welcomeMessage;
 
   static Future<MessageBuilder> _welcomeMessage(IGuildMemberAddEvent event) async {
     final guild = await event.guild.getOrDownload();
@@ -16,22 +17,22 @@ class WelcomingConfig {
 
     final content = EmbedBuilder()
       ..title = '<@$userId>, рады видеть тебя в **$guildName**!'
+      ..color = DiscordColor.fromHexString('#5b4665')
       ..imageUrl = 'https://i.pinimg.com/originals/1c/91/83/1c9183d00ad83ec833bf2ef0d6cf70e2.gif'
       ..addField(
-        name: '',
-        content: 'Посети <#1028537635616063618>, познакомишься с принятыми нормами '
+        name: 'Посети <#1028537635616063618>',
+        content: 'Узнаешь, что хорошо, а что плохо, '
             'и сможешь получить доступ ко всему серверу по кнопке;',
       )
       ..addField(
-        name: '',
-        content: 'Используй <#1028543512649662554> для общения '
-            'и разговоров со всеми обитателями и гостями;',
+        name: 'Чувствуй себя как дома',
+        content: 'Сервер создан для общения и игр со всеми его обитателями и гостями;',
       )
       ..addField(
-        name: '',
-        content: 'Слушай <@&1002999129686933504> и радуйся жизни!',
+        name: 'Благословляй <@&1002999129686933504>',
+        content: 'И радуйся жизни! ✌',
       )
-      ..addFooter((footer) => footer.text = 'Улыбаемся и машем, ребята! (✿◡‿◡)');
+      ..addFooter((footer) => footer.text = 'Улыбаемся и машем! (✿◡‿◡)');
 
     return MessageBuilder.embed(content);
   }

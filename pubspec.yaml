@@ -18,11 +18,9 @@ dependencies:
     path: features/dynamic_presence
   temp_rooms:
     path: features/temp_rooms
+  welcoming:
+    path: features/welcoming
 
   # Utils
   path: ^1.8.3
   dotenv: ^4.0.1
-
-dev_dependencies:
-  build_runner: ^2.3.3
-  drift_dev: ^2.4.1

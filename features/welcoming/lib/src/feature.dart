@@ -11,6 +11,7 @@ class Welcoming {
     WelcomingConfig? configOverride,
   }) : config = configOverride ?? WelcomingConfig() {
     client.eventsWs.onGuildMemberAdd.listen(_handler);
+    client.eventsWs.onGuildMemberAddScreening.listen(_handler);
   }
 
   Future<void> _handler(IGuildMemberAddEvent event) async {
