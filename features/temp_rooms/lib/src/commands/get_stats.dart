@@ -38,7 +38,7 @@ class GetStats implements SlashCommand {
 
   MessageBuilder getSuccessMessage(Stat stats) {
     final content = EmbedBuilder()
-      ..color = config.messageColor
+      ..color = DiscordColor.fromHexString(config.messageHexColor)
       ..title = 'Статистика'
       ..addField(
         name: 'Самый активный',
@@ -60,7 +60,7 @@ class GetStats implements SlashCommand {
 
   MessageBuilder getEmptyStatMessage() {
     final content = EmbedBuilder()
-      ..color = config.messageColor
+      ..color = DiscordColor.fromHexString(config.messageHexColor)
       ..title = 'Нет данных!'
       ..addField(
         name: '',
@@ -73,7 +73,7 @@ class GetStats implements SlashCommand {
 
   MessageBuilder getFailureMessage() {
     final content = EmbedBuilder()
-      ..color = config.messageColor
+      ..color = DiscordColor.fromHexString(config.messageHexColor)
       ..addField(
         name: 'Упс!',
         content: 'Что-то пошло не так, возможно, стоит попробовать еще раз...',

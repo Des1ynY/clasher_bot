@@ -70,7 +70,7 @@ class CreateFuncChannel implements SlashCommand {
 
   MessageBuilder getSuccessMessage(int channelId) {
     final content = EmbedBuilder()
-      ..color = config.messageColor
+      ..color = DiscordColor.fromHexString(config.messageHexColor)
       ..addField(name: 'Готово!', content: '<#$channelId> назначен функциональным!');
 
     return MessageBuilder.embed(content);
@@ -78,7 +78,7 @@ class CreateFuncChannel implements SlashCommand {
 
   MessageBuilder getFailureMessage() {
     final content = EmbedBuilder()
-      ..color = config.messageColor
+      ..color = DiscordColor.fromHexString(config.messageHexColor)
       ..addField(
         name: 'Усп!',
         content: 'Что-то пошло не так, возможно, стоит попробовать еще раз...',
