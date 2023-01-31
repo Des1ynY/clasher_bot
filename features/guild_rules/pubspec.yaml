@@ -1,0 +1,8 @@
+name: guild_rules
+description: Embed message for server rules and roles button.
+
+environment:
+  sdk: ">=2.19.0 <3.0.0"
+
+dependencies:
+  nyxx: ^4.4.1
