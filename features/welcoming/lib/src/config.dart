@@ -1,39 +1,38 @@
-import 'package:nyxx/nyxx.dart';
-
-typedef WelcomeMessageBuilder = Future<MessageBuilder> Function(IGuildMemberAddEvent);
-
 class WelcomingConfig {
-  final WelcomeMessageBuilder welcomeMessageBuilder;
+  final String defaultMessageJson;
 
   WelcomingConfig({
-    WelcomeMessageBuilder? welcomeMessage,
-  }) : welcomeMessageBuilder = welcomeMessage ?? _welcomeMessage;
+    String? defaultMessageJson,
+  }) : defaultMessageJson = defaultMessageJson ?? _defaultMessageJson;
 
-  static Future<MessageBuilder> _welcomeMessage(IGuildMemberAddEvent event) async {
-    final guild = await event.guild.getOrDownload();
-
-    final guildName = guild.name;
-    final userId = event.user.id.id;
-
-    final content = EmbedBuilder()
-      ..title = '<@$userId>, рады видеть тебя в **$guildName**!'
-      ..color = DiscordColor.fromHexString('#5b4665')
-      ..imageUrl = 'https://i.pinimg.com/originals/1c/91/83/1c9183d00ad83ec833bf2ef0d6cf70e2.gif'
-      ..addField(
-        name: 'Посети <#1028537635616063618>',
-        content: 'Узнаешь, что хорошо, а что плохо, '
-            'и сможешь получить доступ ко всему серверу по кнопке;',
-      )
-      ..addField(
-        name: 'Чувствуй себя как дома',
-        content: 'Сервер создан для общения и игр со всеми его обитателями и гостями;',
-      )
-      ..addField(
-        name: 'Благословляй <@&1002999129686933504>',
-        content: 'И радуйся жизни! ✌',
-      )
-      ..addFooter((footer) => footer.text = 'Улыбаемся и машем! (✿◡‿◡)');
-
-    return MessageBuilder.embed(content);
-  }
+  static const _defaultMessageJson = '''
+    {
+        "content": {
+            "title": "Привет, %USERNAME%, и добро пожаловать в ✨%GUILDNAME%✨",
+            "body": [
+                {
+                    "name": "Посети <#%RULESCHANNELID%>",
+                    "content": "Узнаешь местные обычаи и может научишься этикету;",
+                    "inline": false
+                },
+                {
+                    "name": "Пей, гуляй и веселись",
+                    "content": "Как говорил один классик: \"Ничто не истинно, все дозволено\".",
+                    "inline": false
+                },
+                {
+                    "name": "И благославляй <@%GUILDOWNERID%>",
+                    "content": "Ибо он свет и он же тьма. Ну и потому что забанить может (⊙x⊙;)",
+                    "inline": false
+                }
+            ],
+            "footer": "Улыбаемся и машем! (✿◡‿◡)"
+        },
+        "config": {
+            "mention": true,
+            "color": "#5b4665",
+            "image_url": "https://i.pinimg.com/originals/1c/91/83/1c9183d00ad83ec833bf2ef0d6cf70e2.gif"
+        }
+    }
+    ''';
 }

@@ -13,12 +13,19 @@ class MessagesDao extends DatabaseAccessor<Cache> with _$MessagesDaoMixin {
     return select(db.messagesTable).watch().asBroadcastStream();
   }
 
-  Future<void> enableWelcoming(int guildId) async {
+  Future<void> enableWelcoming(int guildId, {bool isCaching = false}) async {
     final welcomeMessage = MessagesTableCompanion.insert(guildId: Value(guildId));
 
     await into(db.messagesTable).insert(
       welcomeMessage,
-      onConflict: DoUpdate((old) => welcomeMessage),
+      onConflict: DoUpdate(
+        (old) => !isCaching
+            ? welcomeMessage
+            : MessagesTableCompanion.custom(
+                guildId: old.guildId,
+                messageJson: old.messageJson,
+              ),
+      ),
     );
   }
 
