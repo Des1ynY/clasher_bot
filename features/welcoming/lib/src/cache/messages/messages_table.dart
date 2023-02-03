@@ -5,7 +5,6 @@ import 'package:drift/drift.dart';
 @DataClassName('WelcomeMessage')
 class MessagesTable extends Table {
   IntColumn get guildId => integer()();
-  IntColumn get systemChannelId => integer().nullable()();
   TextColumn get messageJson => text().withDefault(const Constant(_defaultMessageJson))();
 
   @override
@@ -18,7 +17,7 @@ const _defaultMessageJson = '''
         "title": "Привет, %USERNAME%, и добро пожаловать в ✨%GUILDNAME%✨",
         "body": [
             {
-                "name": "Посети <#%RULESCHANNEL%>",
+                "name": "Посети <#%RULESCHANNELID%>",
                 "content": "Узнаешь местные обычаи и может научишься этикету;",
                 "inline": false
             },
@@ -28,7 +27,7 @@ const _defaultMessageJson = '''
                 "inline": false
             },
             {
-                "name": "И благославляй <@%GUILDOWNER%>",
+                "name": "И благославляй <@%GUILDOWNERID%>",
                 "content": "Ибо он свет и он же тьма. Ну и потому что забанить может (⊙x⊙;)",
                 "inline": false
             }
