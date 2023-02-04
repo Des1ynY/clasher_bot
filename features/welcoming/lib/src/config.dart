@@ -8,21 +8,21 @@ class WelcomingConfig {
   static const _defaultMessageJson = r'''
     {
         "content": {
-            "title": "Привет, %USERNAME%, и добро пожаловать в ✨%GUILDNAME%✨",
+            "title": "Привет и добро пожаловать в ✨%GUILDNAME%✨",
             "fields": [
                 {
-                    "name": "Посети <#%RULESCHANNELID%>",
-                    "content": "Узнаешь местные обычаи и может научишься этикету;",
+                    "name": "",
+                    "content": "**Посети <#%RULESCHANNELID%>**\nТы все таки в приличном обществе;",
                     "inline": false
                 },
                 {
-                    "name": "Пей, гуляй и веселись",
-                    "content": "Как говорил один классик: \"Ничто не истинно, все дозволено\".",
+                    "name": "",
+                    "content": "**Пей, гуляй и веселись!**\n Как говорил один классик: \"Ничто не истинно, все дозволено\";",
                     "inline": false
                 },
                 {
-                    "name": "И благославляй <@%GUILDOWNERID%>",
-                    "content": "Ибо он свет и он же тьма. Ну и потому что забанить может (⊙x⊙;)",
+                    "name": "",
+                    "content": "**И благославляй <@%GUILDOWNERID%>**\n Ибо он свет и он же тьма. Ну и потому что забанить может (⊙x⊙;)",
                     "inline": false
                 }
             ],
