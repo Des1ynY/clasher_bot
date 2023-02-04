@@ -26,7 +26,7 @@ class ClasherBot {
       ..registerPlugin(IgnoreExceptions());
 
     // Enables features
-    Welcoming(client: client);
+    Welcoming(client: client, connection: dbConnection);
     DynamicPresence(client: client);
     TempRooms(client: client, actions: actions, connection: dbConnection);
 

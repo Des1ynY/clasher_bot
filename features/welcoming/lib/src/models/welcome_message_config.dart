@@ -31,8 +31,8 @@ class WelcomeMessageConfig {
 
     return WelcomeMessageConfig._(
       title: content['title'] as String?,
-      fields: (content['fields'] as List<Map<String, dynamic>>?)
-          ?.map(_WelcomeMessageField.fromJson)
+      fields: (content['fields'] as List<dynamic>?)
+          ?.map((dynamic e) => _WelcomeMessageField.fromJson(e as Map<String, dynamic>))
           .toList(),
       footerText: content['footer'] as String?,
       discordHextColor: config['color'] as String?,
@@ -73,9 +73,10 @@ class _WelcomeMessageField {
 
   factory _WelcomeMessageField.fromJson(Map<String, dynamic> json) {
     return _WelcomeMessageField(
-        name: json['name'] as String?,
-        content: json['content'] as String?,
-        inline: json['inline'] as bool?);
+      name: json['name'] as String?,
+      content: json['content'] as String?,
+      inline: json['inline'] as bool?,
+    );
   }
 
   EmbedFieldBuilder toEmbedField() => EmbedFieldBuilder(_name, _content, _inline);

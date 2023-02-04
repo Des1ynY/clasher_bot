@@ -5,11 +5,11 @@ class WelcomingConfig {
     String? defaultMessageJson,
   }) : defaultMessageJson = defaultMessageJson ?? _defaultMessageJson;
 
-  static const _defaultMessageJson = '''
+  static const _defaultMessageJson = r'''
     {
         "content": {
             "title": "Привет, %USERNAME%, и добро пожаловать в ✨%GUILDNAME%✨",
-            "body": [
+            "fields": [
                 {
                     "name": "Посети <#%RULESCHANNELID%>",
                     "content": "Узнаешь местные обычаи и может научишься этикету;",
