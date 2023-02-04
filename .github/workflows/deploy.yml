@@ -2,7 +2,7 @@ name: Deploy
 
 on:
   push:
-    branches: [ "main" ]
+    branches: ["main"]
 
 jobs:
   build:
@@ -15,8 +15,9 @@ jobs:
           username: ${{ secrets.USERNAME }}
           password: ${{ secrets.PASSWORD }}
           script: |
+            sudo systemctl stop clasher_bot
             cd clasher-bot/
             git fetch
             git pull
             dart pub get
-            sudo systemctl restart clasher_bot
+            sudo systemctl start clasher_bot
