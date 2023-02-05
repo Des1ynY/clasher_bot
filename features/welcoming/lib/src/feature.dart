@@ -1,27 +1,34 @@
+import 'dart:async';
+
+import 'package:drift/drift.dart';
 import 'package:nyxx/nyxx.dart';
 
+import 'cache/cache.dart';
 import 'config.dart';
+import 'handlers/guilds_cacher.dart';
+import 'handlers/message_sender.dart';
 
 class Welcoming {
   final INyxxWebsocket client;
   final WelcomingConfig config;
+  late final Cache cache;
 
   Welcoming({
     required this.client,
+    required DatabaseConnection? connection,
     WelcomingConfig? configOverride,
   }) : config = configOverride ?? WelcomingConfig() {
-    client.eventsWs.onGuildMemberAdd.listen(_handler);
-    client.eventsWs.onGuildMemberAddScreening.listen(_handler);
-  }
+    runZoned(
+      () {
+        cache = Cache(connection);
 
-  Future<void> _handler(IGuildMemberAddEvent event) async {
-    final guild = await event.guild.getOrDownload();
-    final systemChannel = await guild.systemChannel?.getOrDownload();
+        final newGuildEvents = client.eventsWs.onGuildCreate;
+        final newMemberEvents = client.eventsWs.onGuildMemberAdd;
 
-    if (systemChannel != null) {
-      final welcomeMessage = await config.welcomeMessageBuilder(event);
-
-      await systemChannel.sendMessage(welcomeMessage);
-    }
+        GuildsCacher(newGuildEvents, cache: cache);
+        MessageSender(newMemberEvents, cache: cache);
+      },
+      zoneValues: {'config': config},
+    );
   }
 }

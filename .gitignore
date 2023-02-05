@@ -9,14 +9,6 @@ build/
 .vscode/
 .obsidian/
 
-# Generated files
-**/*.g.*
-**/*.gr.*
-**/*.gen.*
-**/*.drift.*
-**/*.tailor.*
-**/*.freezed.*
-
 # Environment
 .env
 db.sqlite3

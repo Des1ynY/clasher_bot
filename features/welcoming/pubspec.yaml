@@ -1,5 +1,5 @@
 name: welcoming
-description: Welcoming new server members
+description: Sends welcome message to new server members.
 
 environment:
   sdk: ">=2.19.0 <3.0.0"
@@ -7,3 +7,9 @@ environment:
 dependencies:
   nyxx: ^4.4.1
   nyxx_interactions: ^4.5.0
+  drift: ^2.4.2
+  path: ^1.8.3
+
+dev_dependencies:
+  build_runner: ^2.3.3
+  drift_dev: ^2.4.1
